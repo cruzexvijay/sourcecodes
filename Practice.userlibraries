@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="apidocs" />
+  <library name="servlet-api">
+    <archive path="/home/vijaykumar/Downloads/apache-tomcat-7.0.72/lib/servlet-api.jar" />
+  </library>
+</eclipse-userlibraries>
+
