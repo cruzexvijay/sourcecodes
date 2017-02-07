@@ -6,11 +6,15 @@ import java.util.List;
 import Exceptions.StackOverflowException;
 import Exceptions.StackUnderflowException;
 
+/**
+ * A Custom implementation of Stack
+ * @param <T> Type of the data to be inserted into the stack
+ */
 public class VStack<T>{
 
 	private List<T> stackData = new ArrayList<>();
-	int top=0;
-	public static final int MAX_SIZE = 1395; // maximum size of the stack
+	private int top=0;
+	private static final int MAX_SIZE = 1395; // maximum size of the stack
 	
 	/**
 	 * pushes the new item into the stack
@@ -38,9 +42,8 @@ public class VStack<T>{
 		// check if the stack is empty before popping up.
 		if(stackData.isEmpty())
 			throw new StackUnderflowException();
-		
-		T data = stackData.remove(stackData.size()-1); //popping
-		return data;
+
+		return stackData.remove(stackData.size()-1); //popping;
 	}
 	
 	/**

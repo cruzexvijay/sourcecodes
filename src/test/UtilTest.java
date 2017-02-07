@@ -21,7 +21,7 @@ public class UtilTest {
 	public static void mergeDemo(){
 		VLinkedList list1 = new VLinkedList();
 		VLinkedList list2 = new VLinkedList();
-		VLinkedList newList =null;
+		VLinkedList newList;
 		
 //		list1.head = new LNode(1);
 //		list1.head.next = new LNode(2);
@@ -101,7 +101,7 @@ public class UtilTest {
 		System.out.println(LLutil.isPalindrome(list.head));
 	}
 
-	public static void recReverse(){
+	private static void recReverse(){
 		
 		VLinkedList list = new VLinkedList();
 		

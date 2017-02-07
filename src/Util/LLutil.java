@@ -114,10 +114,12 @@ public class LLutil {
 		}
 		
 		if(fast != null){
+			assert slow != null;
 			midPoint = slow;
 			slow = slow.next;
 		}
-		
+
+		assert slow_prev != null;
 		slow_prev.next= null;
 		
 		VLinkedList halfList = new VLinkedList();
@@ -143,7 +145,7 @@ public class LLutil {
 		return res;
 	}
 
-	public static void printRecursiveReverse(LNode node){
+	private static void printRecursiveReverse(LNode node){
 		
 		if(node==null)
 			return;
@@ -157,7 +159,7 @@ public class LLutil {
 	public static LNode recursiveReverse(LNode current,LNode prev){
 		// 1->2->3->4
 		
-		LNode head=null;
+		LNode head;
 		
 		if(current.next == null){
 			head = current;

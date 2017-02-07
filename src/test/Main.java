@@ -62,9 +62,10 @@ public class Main {
 		list.add(12);
 		list.sortedInsert(11);
 		list.printList();
-		
-		
+
 		list.clear();
+
+		System.out.println();
 
 
 		list.add(6);
@@ -76,15 +77,15 @@ public class Main {
 
         list.printList();
         System.out.println("Sorting");
-        list.sort();
+      //  list.sort();
 
-        System.out.println(list.size());
-        list.printList();
+      //  System.out.println(list.size());
+      //  list.printList();
 				
-		System.out.println();
+	//	System.out.println();
 	}
 	
-	public static int findSize(LNode node){
+	private static int findSize(LNode node){
 		if(node==null)return 0;
 		return 1+findSize(node.next);
 	}

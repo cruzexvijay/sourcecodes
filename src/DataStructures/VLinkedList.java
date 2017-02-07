@@ -2,10 +2,11 @@ package DataStructures;
 
 import Util.LLutil;
 
+/**
+ * A Custom implementation of LinkedList datastructure
+ */
 public class VLinkedList {
 
-	int data;
-	
 	public LNode head=null;
 	
 	/**
@@ -25,8 +26,9 @@ public class VLinkedList {
 			while(node!=null && node.next!=null){
 				node=node.next;
 			}
-			
-			node.next = newNode;
+
+            assert node != null;
+            node.next = newNode;
 			//head = node;
 		}
 		
@@ -105,8 +107,9 @@ public class VLinkedList {
 		
 		if(currentNode==null)
 			return;
-		
-		prevNode.next = currentNode.next;
+
+        assert prevNode != null;
+        prevNode.next = currentNode.next;
 				
 	}
 	
@@ -122,7 +125,7 @@ public class VLinkedList {
 		LNode prev = null;
 		int count=0;
 		
-		/**
+		/*
 		 * if the position is the first element, with the 
 		 * correct key, then delete the element.
 		 * 
@@ -140,8 +143,9 @@ public class VLinkedList {
 		
 		if(curr==null)
 			return;
-		
-		prev.next = curr.next;
+
+        assert prev != null;
+        prev.next = curr.next;
 			
 	}
 		
@@ -149,7 +153,7 @@ public class VLinkedList {
 		printList(head);
 	}
 	
-	public void printList(LNode node){
+	private void printList(LNode node){
 		
 		if(node==null){
 			System.out.println("No list found");
@@ -180,7 +184,7 @@ public class VLinkedList {
 			node = node.next;
 		}
 		
-		return node != null && node.data==key; 
+		return node != null;
 	}
 	
 	public boolean rSearch(int key){
@@ -193,16 +197,11 @@ public class VLinkedList {
 	 * @param key search key.
 	 * @return true if found, false if not;
 	 */
-	public boolean rSearch(LNode node,int key){
-		
-		if(node==null)
-			return false;
-		
-		if(node.data==key)
-			return true;
-		
-		return rSearch(node.next,key);
-	}
+    private boolean rSearch(LNode node, int key) {
+
+        return node != null && (node.data == key || rSearch(node.next, key));
+
+    }
 		
 	/**
 	 * Swapping of two nodes without swapping their value.
@@ -218,7 +217,7 @@ public class VLinkedList {
 		curX = head;
 		prevX = null;
 
-		/**
+		/*
 		 * find the node for key "X"
 		 */
 		while(curX!=null&&curX.data!=x){
@@ -229,7 +228,7 @@ public class VLinkedList {
 		
 		curY=head;
 		prevY = null;
-		/**
+		/*
 		 * find the node for key "X"
 		 */
 		while(curY!=null && curY.data!=y){
@@ -237,7 +236,7 @@ public class VLinkedList {
 			curY = curY.next;
 		}
 		
-		/**
+		/*
 		 * return when any one of the elements is not present 
 		 */
 		if(curX==null || curY ==null)
@@ -302,8 +301,9 @@ public class VLinkedList {
 			slow = slow.next;
 			fast = fast.next.next;
 		}
-		
-		System.out.println(slow.data);
+
+        assert slow != null;
+        System.out.println(slow.data);
 		return slow;
 	}
 
@@ -360,9 +360,9 @@ public class VLinkedList {
 		
 		LNode current = node;
 		LNode prev = null;
-		LNode temp = null;
+		LNode temp;
 		
-		/**
+		/*
 		 * change next to prev,prev to current, current to next
 		 */
 		while(current!=null){
@@ -418,14 +418,13 @@ public class VLinkedList {
 		LNode node = head;
 		LNode newNode = new LNode(newData);
 		
-		/**
+		/*
 		 * check if the new element is less than the head node;
 		 * if yes, then create a new node and set it as head.
 		 */
 		if(node==null || newData < node.data){
 			newNode.next = node;
-			node = newNode;
-			return;
+            return;
 		}
 		
 		
@@ -433,7 +432,7 @@ public class VLinkedList {
 		LNode curr = node;
 		
 		
-		/**
+		/*
 		 * iterate through the list, until an element greater than
 		 * the new data is found. then insert a new node between the 
 		 * two nodes.
@@ -444,7 +443,8 @@ public class VLinkedList {
 		}
 				
 		newNode.next = curr;
-		prev.next = newNode;		
+        assert prev != null;
+        prev.next = newNode;
 	}
 
 
@@ -530,7 +530,7 @@ public class VLinkedList {
     }
 
 
-    public LNode mergeNodes(LNode a, LNode b) {
+    private LNode mergeNodes(LNode a, LNode b) {
 
         if(a==null && b==null)
             return null;
