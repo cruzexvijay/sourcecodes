@@ -1,6 +1,8 @@
 package DataStructures;
 
-import Util.LLutil;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * A Custom implementation of LinkedList datastructure
@@ -120,7 +122,6 @@ public class VLinkedList {
 	 */
 	public void remove(int key,int pos){
 
-		
 		LNode curr=head;
 		LNode prev = null;
 		int count=0;
@@ -148,10 +149,69 @@ public class VLinkedList {
         prev.next = curr.next;
 			
 	}
+	
+	/**
+	 * Implementation to remove duplicates in sorted list
+	 */
+	public void removeSortedDuplicates(){
+				
+		LNode prev = null;
+		LNode next = null;
+		LNode node = head;
+				
+		if(head==null||head.next==null)
+				return;
+						
+		while(node!=null){
 		
+			if(prev!=null && prev.data == node.data){
+				next = node.next;
+				prev.next = next;
+			}else{
+				prev = node;
+			}
+			node = node.next;
+		}
+		
+	}
+	
+	public void removeUnsortedDuplicates(){
+		
+		Map<Integer,Integer> map = new HashMap<>();
+		
+		LNode prev = null;
+		LNode next = null;
+		LNode node = head;
+		
+		if(head==null||head.next==null)
+			return;
+		
+		while(node!=null){
+			
+			if(prev!=null && map.containsKey(node.data)){
+				next = node.next;
+				prev.next = next;
+			}else{
+				map.put(node.data, 0);
+				prev = node;
+			}
+			node = node.next;
+		}
+		
+	}
+	
+	
+	public boolean contains(int key){
+		return search(key);
+	}
+		
+	/**
+	 * prints the list
+	 */
 	public void printList(){
 		printList(head);
 	}
+	
 	
 	private void printList(LNode node){
 		
@@ -174,7 +234,7 @@ public class VLinkedList {
 	 * @param key search key
 	 * @return true if found, false if not;
 	 */
-	public boolean search(int key){
+	private boolean search(int key){
 		
 		LNode node = head;
 		
@@ -290,20 +350,37 @@ public class VLinkedList {
 	 * @return data of the list
 	 */
 	public LNode getMedian(){
-		
-		LNode slow = head;
-		LNode fast = head;
-		
-		if(head==null)
-			return null;
-		
-		while(slow!=null && fast!=null && fast.next!=null){
-			slow = slow.next;
-			fast = fast.next.next;
+		return this.getMedianNode(head);
+	}
+	
+	/**
+	 * implementation to find the middle node of the linked list
+	 * @param start start node
+	 * @return middle node of the linked list
+	 */
+	private LNode getMedianNode(LNode start) {
+
+		LNode slow;
+		LNode fast;
+
+		if (start == null || start.next == null) {
+			slow = start;
+		} else {
+
+			slow = start;
+			fast = start.next;
+
+			while (fast != null) {
+
+				fast = fast.next;
+
+				if (fast != null) {
+					slow = slow.next;
+					fast = fast.next;
+				}
+			}
 		}
 
-        assert slow != null;
-        System.out.println(slow.data);
 		return slow;
 	}
 
@@ -340,7 +417,6 @@ public class VLinkedList {
 			node = node.next;
 		}
 		
-		
 		return count;
 	}
 
@@ -348,29 +424,43 @@ public class VLinkedList {
 	 * reverses a linked list
 	 */
 	public void reverse(){
-		head= reverse(head);
+		head= reverse(head,1);
 	}
 	
 	/**
-	 * Implementation to reverse the linked list
-	 * @param node head node
-	 * @return reference to the new head node
+	 * reverses the list groups of given size
+	 * @param k size of each group
 	 */
-	public LNode reverse(LNode node){
+	public void reverse(int k){
+		head = reverse(head,k);
+	}
+	
+	/**
+	 * Implementation to reverse the linked list in terms of groups
+	 * @param node start node of the list
+	 * @param k size of the group
+	 * @return head node of the reversed list
+	 */
+	public LNode reverse(LNode node,int k){
 		
 		LNode current = node;
 		LNode prev = null;
-		LNode temp;
+		LNode temp = null;
 		
+		int count = 0;
 		/*
 		 * change next to prev,prev to current, current to next
 		 */
-		while(current!=null){
+		while(count< k && current!=null){
 			temp = current.next; //3 
 			current.next = prev; //1
 			prev = current;
-			current = temp; 
+			current = temp;
+			count++;
 		}
+		
+		if(temp != null)
+			node.next = reverse(temp, k);
 	
 		return prev;
 	}
@@ -472,99 +562,63 @@ public class VLinkedList {
 		return true;
 	}
 
+	
+	/**
+	 * method to sort the current linked list
+	 */
 
     public void sort(){
-        head = sort(head);
+       head = sort(head);
     }
 
-	/*private VLinkedList sort(VLinkedList list){
+    /**
+     * recursive implementation to sort the list based on ascending order
+     * @param head start pointer
+     * @return new node of the sorted sub list
+     */
+    
+    private LNode sort(LNode head) {
+		if (head == null || head.next == null)
+			return head;
+		LNode fast;
+		LNode slow;
+		
+		slow = getMedianNode(head);
+		fast = slow.next;
+		slow.next = null;
+		
+		return mergeNodes(sort(head), sort(fast));
+	}
 
-        LNode node = list.head;
+	/**
+	 * Recursive implementation to merge two lists into a single list
+	 * @param node1 Node 1 of the first linked list
+	 * @param node2 Node 2 of the second linked list
+	 * @return head pointer of the new single sub list 
+	 */
+    private LNode mergeNodes(LNode node1, LNode node2) {
 
-        if(node==null || node.next == null)
-            return list;
+      
+        if(node1==null)
+            return node2;
 
-
-        LNode node1 = node;
-        LNode node2 = node.next;
-
-        while (node2!= null && node2.next!=null){
-            node1 = node1.next;
-            node2 = node2.next.next;
-        }
-
-        node2 = node1;
-        node1.next = null;
-       // System.out.println("Median :"+median.data);
-        //LNode median_next = median.next;
-        //median.next = null;
-
-        VLinkedList list1 = new VLinkedList();
-        list1.head = node;
-
-        VLinkedList list2 = new VLinkedList();
-        list2.head = node2;
-
-        return LLutil.merge(list1,list2);
-	}*/
-
-
-	private LNode sort(LNode node){
-
-        if(node==null || node.next == null) {
-            return node;
-        }
-
-        LNode mid = getMedianNode();
-        LNode midNext = mid.next;
-        mid.next = null;
-
-        LNode l1 = sort(node);
-        LNode l2 = sort(midNext);
-
-        System.out.println(l1.data);
-        System.out.println(l2.data);
-
-        return mergeNodes(l1,l2);
-
-    }
-
-
-    private LNode mergeNodes(LNode a, LNode b) {
-
-        if(a==null && b==null)
-            return null;
-
-        if(a==null)
-            return b;
-
-        if(b==null)
-            return a;
+        if(node2==null)
+            return node1;
 
         LNode temp;
 
-        if(a.data <b.data) {
-            temp = a;
-            temp.next = mergeNodes(a.next,b);
+        if(node1.data <= node2.data) {
+            temp = node1;
+            temp.next = mergeNodes(node1.next,node2);
         }else {
-            temp = b;
-            temp.next = mergeNodes(a, b.next);
+            temp = node2;
+            temp.next = mergeNodes(node1, node2.next);
         }
+              
         return temp;
 }
 
-	private LNode getMedianNode(){
-
-        LNode slow = head;
-        LNode fast = head;
-
-        while(fast != null && fast.next!=null && fast.next.next!=null ){
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        return slow;
-    }
+	
 	/**
 	 * clears the linked list
 	 */

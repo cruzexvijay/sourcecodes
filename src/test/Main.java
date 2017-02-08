@@ -2,6 +2,8 @@ package test;
 
 import DataStructures.LNode;
 import DataStructures.VLinkedList;
+import Exceptions.StackOverflowException;
+import Exceptions.StackUnderflowException;
 
 public class Main {
 	
@@ -71,18 +73,31 @@ public class Main {
 		list.add(6);
 		list.add(7);
 		list.add(3);
+		list.add(2);
+		list.add(5);
 		list.add(4);
 		list.add(9);
 		list.add(2);
-
-        list.printList();
+		list.add(5);
+		
+		list.printList();
+		System.out.println("////// unsorted dup");
+		list.removeUnsortedDuplicates();
+		list.printList();
+		
+		
         System.out.println("Sorting");
-      //  list.sort();
-
-      //  System.out.println(list.size());
-      //  list.printList();
-				
-	//	System.out.println();
+      list.sort();
+      list.printList();
+     
+      System.out.println("//////");
+      list.reverse(1);
+      list.printList();
+      
+      System.out.println("//////");
+      list.removeSortedDuplicates();
+      list.printList();
+      
 	}
 	
 	private static int findSize(LNode node){

@@ -124,7 +124,7 @@ public class LLutil {
 		
 		VLinkedList halfList = new VLinkedList();
 		
-		halfList.head = new VLinkedList().reverse(slow);
+		halfList.head = new VLinkedList().reverse(slow,1);
 		
 		VLinkedList originalList = new VLinkedList();
 		originalList.head = head;
