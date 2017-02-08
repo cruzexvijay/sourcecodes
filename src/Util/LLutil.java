@@ -1,5 +1,8 @@
 package Util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import DataStructures.LNode;
 import DataStructures.VLinkedList;
 import DataStructures.VStack;
@@ -8,6 +11,8 @@ import Exceptions.StackUnderflowException;
 
 public class LLutil {
 
+	private static VLinkedList list = new VLinkedList();
+	
 	/**
 	 * Check whether a list contains cycle or not
 	 * @param list input Linked List
@@ -177,4 +182,121 @@ public class LLutil {
 	
 	}
 	
+		
+		/**
+		 * Method to swap the elements of the list
+		 * @param head start pointer of the list
+		 * @return an instance of VLinkedList
+		 */
+	  public static VLinkedList dualSwap(LNode head){
+		  	//return IdualSwap(head);
+	    	return recursiveSwap(head);
+	    }
+	    
+	  /**
+	   * Iterative implementation of swapping data among the nodes of the linked list
+	   * @param head start pointer of the list
+	   * @return an instance of VLinkedList
+	   */
+	    private static VLinkedList IdualSwap(LNode head){
+	    	LNode temp = head;
+	    	
+	    	while(temp != null && temp.next != null){
+	    		swap(temp,temp.next);
+	    		
+	    		temp = temp.next.next;
+	    	}
+	    	
+	    	list.head = head;
+	    	return list;
+	    }
+	    
+	    /**
+	     * recursive implementation of swapping the data
+	     * @param node head node of the list
+	     * @return an instance of Vlinked list
+	     */
+	    public static VLinkedList recursiveSwap(LNode node){
+	    	
+	    	
+	    	if(node != null && node.next != null){
+	    		swap(node,node.next);
+	    		recursiveSwap(node.next.next);
+	    	}
+	    	
+	    	list.head = node;
+	    	
+	    	return list;
+	    }
+
+		/**
+		 * method to swap data between two nodes
+		 * @param node1 node1
+		 * @param node2 node2
+		 */
+		private static void swap(LNode node1,LNode node2){
+						
+			node1.data = node1.data + node2.data;
+			node2.data = node1.data - node2.data;
+			node1.data = node1.data - node2.data;
+			
+		}
+		
+		
+		/**
+		 * Implementation to remove duplicates in sorted list
+		 */
+		public static VLinkedList removeSortedDuplicates(LNode head){
+					
+			LNode prev = null;
+			LNode next = null;
+			LNode node = head;
+					
+			if(head==null||head.next==null)
+					return null;
+				
+			while(node!=null){
+			
+				if(prev!=null && prev.data == node.data){
+					next = node.next;
+					prev.next = next;
+				}else{
+					prev = node;
+				}
+				node = node.next;
+			}
+			
+			list.head = head;
+			return list;
+		}
+		
+		public static VLinkedList removeUnsortedDuplicates(LNode head){
+			
+			Map<Integer,Integer> map = new HashMap<>();
+			
+			LNode prev = null;
+			LNode next = null;
+			LNode node = head;
+			
+			if(head==null||head.next==null)
+				return null;
+			
+			while(node!=null){
+				
+				if(prev!=null && map.containsKey(node.data)){
+					next = node.next;
+					prev.next = next;
+				}else{
+					map.put(node.data, 0);
+					prev = node;
+				}
+				node = node.next;
+			}
+			
+			list.head = head;
+			
+			return list;
+			
+		}
+				
 }

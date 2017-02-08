@@ -4,10 +4,11 @@ import DataStructures.LNode;
 import DataStructures.VLinkedList;
 import Exceptions.StackOverflowException;
 import Exceptions.StackUnderflowException;
+import Util.LLutil;
 
 public class Main {
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws CloneNotSupportedException{
 		VLinkedList list = new VLinkedList();
 		
 		list.add(1);
@@ -81,11 +82,16 @@ public class Main {
 		list.add(5);
 		
 		list.printList();
+		
+		System.out.println("////// sorted dups");
+		list.sort();
+	     LLutil.removeSortedDuplicates(list.head).printList();
+	      
+	      
 		System.out.println("////// unsorted dup");
-		list.removeUnsortedDuplicates();
-		list.printList();
+		LLutil.removeUnsortedDuplicates(list.head).printList();
 		
-		
+	
         System.out.println("Sorting");
       list.sort();
       list.printList();
@@ -94,10 +100,14 @@ public class Main {
       list.reverse(1);
       list.printList();
       
-      System.out.println("//////");
-      list.removeSortedDuplicates();
-      list.printList();
+     //list.printList();
       
+      System.out.println("Dual Swap");
+      
+      LLutil.dualSwap(list.head).printList();;
+      
+     // LLutil.recursiveSwap(new LNode(list.head)).printList();
+                
 	}
 	
 	private static int findSize(LNode node){

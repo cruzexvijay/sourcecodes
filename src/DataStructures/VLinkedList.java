@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * A Custom implementation of LinkedList datastructure
  */
-public class VLinkedList {
+public class VLinkedList{
 
 	public LNode head=null;
 	
@@ -150,55 +150,6 @@ public class VLinkedList {
 			
 	}
 	
-	/**
-	 * Implementation to remove duplicates in sorted list
-	 */
-	public void removeSortedDuplicates(){
-				
-		LNode prev = null;
-		LNode next = null;
-		LNode node = head;
-				
-		if(head==null||head.next==null)
-				return;
-						
-		while(node!=null){
-		
-			if(prev!=null && prev.data == node.data){
-				next = node.next;
-				prev.next = next;
-			}else{
-				prev = node;
-			}
-			node = node.next;
-		}
-		
-	}
-	
-	public void removeUnsortedDuplicates(){
-		
-		Map<Integer,Integer> map = new HashMap<>();
-		
-		LNode prev = null;
-		LNode next = null;
-		LNode node = head;
-		
-		if(head==null||head.next==null)
-			return;
-		
-		while(node!=null){
-			
-			if(prev!=null && map.containsKey(node.data)){
-				next = node.next;
-				prev.next = next;
-			}else{
-				map.put(node.data, 0);
-				prev = node;
-			}
-			node = node.next;
-		}
-		
-	}
 	
 	
 	public boolean contains(int key){
@@ -221,7 +172,7 @@ public class VLinkedList {
 		}
 					
 		while(node!=null){
-			System.out.print(" "+node.data);
+			System.out.print(node.data+" ");
 			node = node.next;
 		}
 		
@@ -388,14 +339,14 @@ public class VLinkedList {
 	 * get Nth node from the end of the linked list
 	 * @param pos position from the end.
 	 */
-	public void getNthNodefromLast(int pos){
+	public LNode getNthNodefromLast(int pos){
 		
 		LNode temp = getNthNode(size()-1-pos);
 		
 		if(temp!=null)
-			System.out.println(temp.data);
+			return temp;
 		else
-			System.out.println("Element not found");
+			return null;
 		
 	}
 
@@ -617,15 +568,15 @@ public class VLinkedList {
               
         return temp;
 }
-
-	
+  
 	/**
 	 * clears the linked list
 	 */
 	public void clear(){
 		this.head = null;
 	}
-	
+
+		
 }
 
 
