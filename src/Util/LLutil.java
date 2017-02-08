@@ -11,7 +11,7 @@ import Exceptions.StackUnderflowException;
 
 public class LLutil {
 
-	private static VLinkedList list = new VLinkedList();
+	private static final VLinkedList list = new VLinkedList();
 	
 	/**
 	 * Check whether a list contains cycle or not
@@ -50,17 +50,16 @@ public class LLutil {
 		int list1_len = list1.size();
 		int list2_len = list2.size();
 		
-		System.out.println("LEN1 : "+list1_len+"\n LEN2 :"+list2_len);
+		//System.out.println("LEN1 : "+list1_len+"\n LEN2 :"+list2_len);
 		int i=0,j=0;
 			
 		while(i<list1_len && j<list2_len){
 			
 			if(list1.get(i) <= list2.get(j)){
 				newList.add(list1.get(i++));
-			}else{
-				newList.add(list2.get(j++));
-			}
-						
+			}else {
+                newList.add(list2.get(j++));
+            }
 		}
 	
 		while(i<list1_len){
@@ -86,8 +85,7 @@ public class LLutil {
 			callStack.push(list.get(i++));
 			node = node.next;
 		}
-		
-		
+
 		node = list.head;
 				
 		while(node!=null){
@@ -99,8 +97,7 @@ public class LLutil {
 				
 			node = node.next;
 		}
-		
-		
+
 		return isPalin;
 	}
 
@@ -110,8 +107,7 @@ public class LLutil {
 		LNode fast = head;
 		LNode slow_prev = null;
 		LNode midPoint = null;
-		
-		
+
 		while(slow!=null && fast!=null && fast.next!=null){
 			slow_prev = slow;
 			slow = slow.next;
@@ -160,8 +156,7 @@ public class LLutil {
 			current.next = prev;
 			return head;
 		}
-			
-		
+
 		LNode next = current.next; //2
 		
 		current.next = prev; //null
@@ -170,8 +165,7 @@ public class LLutil {
 		return  recursiveReverse(next, current);
 	
 	}
-	
-		
+
 		/**
 		 * Method to swap the elements of the list
 		 * @param head start pointer of the list
@@ -187,7 +181,7 @@ public class LLutil {
 	     * @param node head node of the list
 	     * @return an instance of Vlinked list
 	     */
-	    public static VLinkedList recursiveSwap(LNode node){
+	    private static VLinkedList recursiveSwap(LNode node){
 	    	
 	    	
 	    	if(node != null && node.next != null){
@@ -206,21 +200,18 @@ public class LLutil {
 		 * @param node2 node2
 		 */
 		private static void swap(LNode node1,LNode node2){
-						
 			node1.data = node1.data + node2.data;
 			node2.data = node1.data - node2.data;
 			node1.data = node1.data - node2.data;
-			
 		}
-		
-		
+
 		/**
 		 * Implementation to remove duplicates in sorted list
 		 */
 		public static VLinkedList removeSortedDuplicates(LNode head){
 					
 			LNode prev = null;
-			LNode next = null;
+			LNode next;
 			LNode node = head;
 					
 			if(head==null||head.next==null)
@@ -246,7 +237,7 @@ public class LLutil {
 			Map<Integer,Integer> map = new HashMap<>();
 			
 			LNode prev = null;
-			LNode next = null;
+			LNode next;
 			LNode node = head;
 			
 			if(head==null||head.next==null)
@@ -271,20 +262,13 @@ public class LLutil {
 		
 	public static LNode findIntersect(LNode node1, LNode node2) {
 
-		
-		
-		LNode newHead = null;
-		LNode node = newHead;
+			VLinkedList list = new VLinkedList();
 
 		while (node1 != null && node2 != null) {
 			
 			if (node1.data == node2.data) {
-				
-				newHead.next = push(newHead,node1.data);
-							
-				new VLinkedList().printList(newHead);
-				
-				//System.out.println(newHead.data);
+
+				list.add(node1.data);
 				
 				node1 = node1.next;
 				node2 = node2.next;
@@ -293,29 +277,8 @@ public class LLutil {
 				node1 = node1.next;
 			else
 				node2 = node2.next;
-			
-			
 		}
-		
-		//System.out.println(newHead);
-
-		return newHead;
-
+			return list.head;
 	}
-	
-	private static LNode push(LNode head,int data){
-		LNode newNode = null;
-		
-		/*if(head==null)
-			head = new LNode(data);
-		else{
-			newNode = new LNode(data);
-			head.next = newNode;
-		}
-		*/
-		//System.out.println(newNode.data);
-		return new LNode(data);
-				
-	}
-				
+
 }

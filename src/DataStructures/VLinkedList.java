@@ -157,7 +157,7 @@ public class VLinkedList{
 		printList(head);
 	}
 
-	public void printList(LNode node){
+	private void printList(LNode node){
 		
 		if(node==null){
 			System.out.println("No list found");
@@ -501,7 +501,6 @@ public class VLinkedList{
 		return true;
 	}
 
-	
 	/**
 	 * method to sort the current linked list
 	 */
