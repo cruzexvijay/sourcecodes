@@ -150,17 +150,6 @@ public class LLutil {
 		return res;
 	}
 
-	private static void printRecursiveReverse(LNode node){
-		
-		if(node==null)
-			return;
-				
-		printRecursiveReverse(node.next);
-		
-		System.out.println(node.data+" ");
-		
-	}
-	
 	public static LNode recursiveReverse(LNode current,LNode prev){
 		// 1->2->3->4
 		
@@ -194,24 +183,6 @@ public class LLutil {
 	    }
 	    
 	  /**
-	   * Iterative implementation of swapping data among the nodes of the linked list
-	   * @param head start pointer of the list
-	   * @return an instance of VLinkedList
-	   */
-	    private static VLinkedList IdualSwap(LNode head){
-	    	LNode temp = head;
-	    	
-	    	while(temp != null && temp.next != null){
-	    		swap(temp,temp.next);
-	    		
-	    		temp = temp.next.next;
-	    	}
-	    	
-	    	list.head = head;
-	    	return list;
-	    }
-	    
-	    /**
 	     * recursive implementation of swapping the data
 	     * @param node head node of the list
 	     * @return an instance of Vlinked list
