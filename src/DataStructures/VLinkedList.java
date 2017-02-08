@@ -146,10 +146,8 @@ public class VLinkedList{
 			
 	}
 	
-	
-	
 	public boolean contains(int key){
-		return search(key);
+		return search(key)!=null;
 	}
 		
 	/**
@@ -158,9 +156,8 @@ public class VLinkedList{
 	public void printList(){
 		printList(head);
 	}
-	
-	
-	private void printList(LNode node){
+
+	public void printList(LNode node){
 		
 		if(node==null){
 			System.out.println("No list found");
@@ -173,7 +170,6 @@ public class VLinkedList{
 		}
 		
 		System.out.println();
-
 	}
 	
 	/**
@@ -181,7 +177,7 @@ public class VLinkedList{
 	 * @param key search key
 	 * @return true if found, false if not;
 	 */
-	private boolean search(int key){
+	private LNode search(int key){
 		
 		LNode node = head;
 		
@@ -190,8 +186,8 @@ public class VLinkedList{
 		while(node!=null && node.data!=key){
 			node = node.next;
 		}
-		
-		return node != null;
+	
+		return node!=null?node:null;
 	}
 	
 	public boolean rSearch(int key){
@@ -205,9 +201,7 @@ public class VLinkedList{
 	 * @return true if found, false if not;
 	 */
     private boolean rSearch(LNode node, int key) {
-
         return node != null && (node.data == key || rSearch(node.next, key));
-
     }
 		
 	/**
@@ -464,10 +458,8 @@ public class VLinkedList{
             return;
 		}
 		
-		
 		LNode prev=null;
 		LNode curr = node;
-		
 		
 		/*
 		 * iterate through the list, until an element greater than
@@ -544,7 +536,6 @@ public class VLinkedList{
 	 * @return head pointer of the new single sub list 
 	 */
     private LNode mergeNodes(LNode node1, LNode node2) {
-
       
         if(node1==null)
             return node2;

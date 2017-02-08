@@ -267,7 +267,55 @@ public class LLutil {
 			list.head = head;
 			
 			return list;
+		}
+		
+	public static LNode findIntersect(LNode node1, LNode node2) {
+
+		
+		
+		LNode newHead = null;
+		LNode node = newHead;
+
+		while (node1 != null && node2 != null) {
+			
+			if (node1.data == node2.data) {
+				
+				newHead.next = push(newHead,node1.data);
+							
+				new VLinkedList().printList(newHead);
+				
+				//System.out.println(newHead.data);
+				
+				node1 = node1.next;
+				node2 = node2.next;
+
+			} else if (node1.data < node2.data)
+				node1 = node1.next;
+			else
+				node2 = node2.next;
+			
 			
 		}
+		
+		//System.out.println(newHead);
+
+		return newHead;
+
+	}
+	
+	private static LNode push(LNode head,int data){
+		LNode newNode = null;
+		
+		/*if(head==null)
+			head = new LNode(data);
+		else{
+			newNode = new LNode(data);
+			head.next = newNode;
+		}
+		*/
+		//System.out.println(newNode.data);
+		return new LNode(data);
+				
+	}
 				
 }

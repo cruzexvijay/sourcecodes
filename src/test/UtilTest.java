@@ -14,8 +14,33 @@ public class UtilTest {
 		//mergeDemo();
 		//palinDemo1();
 		//equalsDemo();
-		recReverse();
+		//recReverse();
+		intersectDemo();
 		
+	}
+	
+	public static void intersectDemo(){
+		VLinkedList list1 = new VLinkedList();
+		VLinkedList list2 = new VLinkedList();
+		
+		list1.add(1);
+		list1.add(2);
+		list1.add(3);
+		list1.add(4);
+		list1.add(6);
+		list1.printList();
+		
+		list2.add(2);
+		list2.add(4);
+		list2.add(6);
+		list2.add(8);
+		//list2.add(5);
+				
+		list2.printList();
+		
+		list1.head = LLutil.findIntersect(list1.head, list2.head);
+		
+		list1.printList();
 	}
 	
 	public static void mergeDemo(){
@@ -114,5 +139,40 @@ public class UtilTest {
 		list.head = LLutil.recursiveReverse(list.head, null);
 	//	System.out.println(list.head);
 		list.printList();
+	}
+	
+	private static void misc(){
+		VLinkedList list = new VLinkedList();
+		
+		list.add(1);
+		list.add(2);
+		list.add(1);
+		list.add(5);
+		list.add(1);
+		list.add(2);
+		//list.add(5);
+		list.add(1);
+		
+		LLutil.removeSortedDuplicates(list .head).printList();
+
+		System.out.println("////// unsorted dup");
+		LLutil.removeUnsortedDuplicates(list.head).printList();
+
+		System.out.println("Sorting");
+		list.sort();
+		list.printList();
+
+		System.out.println("//////");
+		list.reverse(1);
+		list.printList();
+
+		// list.printList();
+
+		System.out.println("Dual Swap");
+
+		LLutil.dualSwap(list.head).printList();
+		;
+
+		// LLutil.recursiveSwap(new LNode(list.head)).printList();
 	}
 }
