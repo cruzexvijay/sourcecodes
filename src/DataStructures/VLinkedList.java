@@ -365,7 +365,22 @@ public class VLinkedList{
 	 * reverses a linked list
 	 */
 	public void reverse(){
-		head= reverse(head,1);
+		
+		LNode current = head;
+		LNode prev = null;
+		LNode temp = null;
+		
+		/*
+		 * change next to prev,prev to current, current to next
+		 */
+		while(current!=null){
+			temp = current.next; //3 
+			current.next = prev; //1
+			prev = current;
+			current = temp;
+		}
+		
+		head = prev;
 	}
 	
 	/**
@@ -405,6 +420,7 @@ public class VLinkedList{
 	
 		return prev;
 	}
+	
 
 	/**
 	 * method to get the element of the linked list at 0th position
@@ -483,22 +499,25 @@ public class VLinkedList{
 	 * @return true if equals, false if not;
 	 */
 	public boolean equals(VLinkedList list2){
-				
-		if(this.size()!=list2.size())
-			return false;
+		return equals(this.head, list2.head);
+	}
+	
+	/**
+	 * recursive implementation to check whether 
+	 * two lists are equal or not
+	 * @param node1 -> node of list1
+	 * @param node2 -> node of list2
+	 * @return true if equal, false if not;
+	 */
+	private boolean equals(LNode node1,LNode node2){
 		
-		LNode list1_node = this.head;
-		LNode list2_node = list2.head;
+		if(node1==null && node2==null)
+			return true;
 		
-		while(list1_node!=null && list2_node != null){
-			
-			if(list1_node.data != list2_node.data)
-				return false;
-			
-			list1_node = list1_node.next;
-			list2_node = list2_node.next;
-		}
-		return true;
+		if(node1!=null && node2!=null)
+			return (node1.data==node2.data) && equals(node1.next,node2.next);
+		
+		return false;
 	}
 
 	/**
@@ -562,7 +581,6 @@ public class VLinkedList{
 		this.head = null;
 	}
 
-		
 }
 
 

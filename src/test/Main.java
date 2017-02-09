@@ -53,7 +53,8 @@ public class Main {
 
 		list.printList();
 		System.out.println("Reversed List");
-		// list.reverse();
+		 list.reverse();
+		 list.reverse(2);
 		list.printList();
 
 		// System.out.println(list.get());
