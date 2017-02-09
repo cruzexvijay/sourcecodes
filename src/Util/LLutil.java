@@ -265,7 +265,6 @@ public class LLutil {
 			VLinkedList list = new VLinkedList();
 
 		while (node1 != null && node2 != null) {
-			
 			if (node1.data == node2.data) {
 
 				list.add(node1.data);
