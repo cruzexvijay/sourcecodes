@@ -306,16 +306,11 @@ public class LLutil {
 	private static LNode push(LNode head,int data){
 		LNode newNode = null;
 		
-		/*if(head==null)
-			head = new LNode(data);
-		else{
-			newNode = new LNode(data);
-			head.next = newNode;
-		}
-		*/
-		//System.out.println(newNode.data);
-		return new LNode(data);
+		newNode = new LNode(data);
+		
+		newNode.next = head;
 				
+		return newNode;
 	}
 				
 }
