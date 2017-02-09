@@ -19,7 +19,7 @@ public class UtilTest {
 		
 	}
 	
-	public static void intersectDemo(){
+	private static void intersectDemo(){
 		VLinkedList list1 = new VLinkedList();
 		VLinkedList list2 = new VLinkedList();
 		
@@ -29,7 +29,8 @@ public class UtilTest {
 		list1.add(4);
 		list1.add(6);
 		list1.printList();
-		
+
+		list1.add(7);
 		list2.add(2);
 		list2.add(4);
 		list2.add(6);
@@ -171,7 +172,7 @@ public class UtilTest {
 		System.out.println("Dual Swap");
 
 		LLutil.dualSwap(list.head).printList();
-		;
+
 
 		// LLutil.recursiveSwap(new LNode(list.head)).printList();
 	}
