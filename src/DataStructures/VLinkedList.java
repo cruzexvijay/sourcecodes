@@ -1,11 +1,42 @@
 package DataStructures;
 
+import java.util.Comparator;
+
+import org.w3c.dom.Node;
+
 /**
  * A Custom implementation of LinkedList datastructure
  */
 public class VLinkedList{
 
-	public LNode head=null;
+	public LNode head;
+	private Integer MAX_SIZE;
+	private static final int NO_SIZE = -1395;
+	
+	private Comparator<Integer> listComparator = null;
+	
+	public VLinkedList() {
+			
+		this.head = null;
+		this.MAX_SIZE = NO_SIZE;
+		
+		if(this.listComparator==null){
+			listComparator = new Comparator<Integer>() {
+
+				@Override
+				public int compare(Integer o1, Integer o2) {
+					// TODO Auto-generated method stub
+					return o1.compareTo(o2);
+				}
+			};
+		}
+	}
+		
+	public VLinkedList(Integer size) {
+		super();
+		this.MAX_SIZE = size;
+	}
+	
 	
 	/**
 	 * Method to add element to the end of the list
@@ -13,11 +44,13 @@ public class VLinkedList{
 	 */
 	public VLinkedList add(int data){
 		
+		if(MAX_SIZE!=NO_SIZE && size()>MAX_SIZE)
+			throw new IndexOutOfBoundsException("Limit Exceeded");
+		
 		if(head==null){
 			head = new LNode(data);
 		}
 		else{
-			
 			LNode newNode = new LNode(data);
 			LNode node=head;
 		
@@ -527,7 +560,16 @@ public class VLinkedList{
     public void sort(){
        head = sort(head);
     }
-
+    
+    /**
+     * Sorting based on custom comparator interface
+     * @param customComparator custom comparator interface
+     */
+    public void sort(Comparator<Integer> customComparator){
+    	this.listComparator = customComparator;
+    	head = sort(head);
+    }
+    
     /**
      * recursive implementation to sort the list based on ascending order
      * @param head start pointer
@@ -535,6 +577,7 @@ public class VLinkedList{
      */
     
     private LNode sort(LNode head) {
+    	
 		if (head == null || head.next == null)
 			return head;
 		LNode fast;
@@ -563,7 +606,7 @@ public class VLinkedList{
 
         LNode temp;
 
-        if(node1.data <= node2.data) {
+        if(listComparator.compare(node1.data, node2.data)<0) {
             temp = node1;
             temp.next = mergeNodes(node1.next,node2);
         }else {
@@ -572,7 +615,37 @@ public class VLinkedList{
         }
               
         return temp;
-}
+    }
+    
+   public void rotateList(int k){
+	   head = rotateList(head,k);
+   }
+    
+    private LNode rotateList(LNode node,int k){
+    	
+    	LNode current = node;
+    	LNode kthNode = null;
+    	int count = 0;
+    	
+    	while(count < k-1 && current != null){
+    		current = current.next;
+    		count++;
+    	}
+    	
+    	kthNode = current;
+    	
+    	while(current!=null && current.next != null){
+    		current = current.next;
+    	}
+    	
+    	current.next = node;
+    	
+    	node = kthNode.next;
+    	
+    	kthNode.next = null;
+    	
+    	return node!=null?node:null;
+    }
   
 	/**
 	 * clears the linked list

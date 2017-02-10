@@ -6,7 +6,7 @@ package DataStructures;
  *
  */
 public class LNode implements Cloneable{
-	public int data;
+	public Integer data;
 	public LNode next;
 	
 	public LNode(int data){

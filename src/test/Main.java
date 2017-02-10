@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Comparator;
+
 import DataStructures.LNode;
 import DataStructures.VLinkedList;
 import Util.LLutil;
@@ -80,10 +82,25 @@ public class Main {
 
 		list.printList();
 
-		System.out.println("////// sorted dups");
+		System.out.println("---ascending order-----");
 		list.sort();
+		list.printList();
+		System.out.println("---descending order-----");
+		list.sort(new Comparator<Integer>() {
+			
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				// TODO Auto-generated method stub
+				return o2.compareTo(o1);
+			}
+		});
 		
-
+		list.printList();
+		
+		System.out.println("Rotating list");
+		list.rotateList(4);
+		list.printList();
+				
 	}
 
 	private static int findSize(LNode node) {

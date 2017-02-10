@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Comparator;
+
 import DataStructures.LNode;
 import DataStructures.VLinkedList;
 import Exceptions.StackOverflowException;
@@ -22,7 +24,49 @@ public class UtilTest {
 		//altDemo();
 		//delDemo();
 		//oddDemo();
-		cycleDemo();
+		//cycleDemo();
+		tripletDemo();
+	}
+	
+	
+	private static void tripletDemo(){
+		 VLinkedList llist1 = new VLinkedList();
+	        VLinkedList llist2 = new VLinkedList();
+	        VLinkedList llist3 = new VLinkedList();
+	 
+	        /* Create Linked List llist1 100->15->5->20 */
+	        llist1.add(20);
+	        llist1.add(5);
+	        llist1.add(15);
+	        llist1.add(100);
+	     
+	        /*create a sorted linked list 'b' 2->4->9->10 */
+	        llist2.add(10);
+	        llist2.add(9);
+	        llist2.add(4);
+	        llist2.add(2);
+	        
+	        llist2.sort();
+	 
+	        /*create another sorted linked list 'c' 8->4->2->1 */
+	        llist3.add(1);
+	        llist3.add(2);
+	        llist3.add(4);
+	        llist3.add(8);
+	 
+	        llist3.sort(new Comparator<Integer>() {
+				
+				@Override
+				public int compare(Integer o1, Integer o2) {
+					// TODO Auto-generated method stub
+					return o2.compareTo(o1);
+				}
+			});
+	        int val = 25;
+	        
+	        llist1.head = LLutil.findTriplets(llist1.head, llist2.head, llist3.head, val);
+	        
+	        llist1.printList();
 	}
 	
 	private static void cycleDemo(){
@@ -35,7 +79,8 @@ public class UtilTest {
 		list.head.next.next = new LNode(3);
 		list.head.next.next.next = new LNode(4);
 		list.head.next.next.next.next = new LNode(5);
-		list.head.next.next.next.next.next = list.head.next;
+		list.head.next.next.next.next.next = new LNode(6);
+		list.head.next.next.next.next.next = list.head.next.next;
 		
 		//System.out.println("1->2->3->4->5->2");
 		list.head = LLutil.removeLoop(list);

@@ -1,5 +1,6 @@
 package Util;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -501,21 +502,54 @@ public class LLutil {
 		LNode slow = node;
 		LNode fast = node.next;
 		
+		while(fast != null && fast.next!=null){
+			
+			if(slow==fast)
+				break;
+			
+			slow = slow.next;
+			fast = fast.next.next;
+		}
 		
-		while(slow!=null && fast != null && fast.next!=null){
+		if(slow == fast){
+			slow = node;
 			
-			if(slow==fast){
-				slow.next.next = null;
-			}
-					
-			fast = fast.next;
-			
-			if(fast.next!=null){
+			while(slow!=fast.next){
 				slow = slow.next;
 				fast = fast.next;
 			}
-		
+			
+			fast.next = null;
 		}
 		return node;
+	}
+	
+	public static LNode findTriplets(LNode node1,LNode node2,LNode node3,int val){
+		
+		LNode a = node1;
+		LNode b = node2;
+		LNode c = node3;
+		
+		LNode newRef = null;
+		
+		while(a!=null){
+		
+			while(b!=null && c!=null){
+				
+				int sum = a.data + b.data + c.data;
+
+				if(sum==val){
+					newRef = push(push(push(newRef, a), b),c);
+					break;
+				}else if (sum < val){
+					b = b.next;
+				}else
+					c = c.next;
+			}
+			
+			a = a.next;
+		}
+		
+		return newRef!=null?newRef:null;
 	}
 }
