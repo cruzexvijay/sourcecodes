@@ -4,10 +4,11 @@ import java.util.Comparator;
 /**
  * A Custom implementation of LinkedList datastructure
  */
+@SuppressWarnings("ALL")
 public class VLinkedList{
 
 	public LNode head;
-	private Integer MAX_SIZE;
+	private final Integer MAX_SIZE;
 	private static final int NO_SIZE = -1395;
 	
 	private Comparator<Integer> listComparator = null;
@@ -39,7 +40,8 @@ public class VLinkedList{
 	 * Method to add element to the end of the list
 	 * @param data new data to be inserted into the list
 	 */
-	public VLinkedList add(int data){
+	@SuppressWarnings("UnusedReturnValue")
+    public VLinkedList add(int data){
 		
 		if(MAX_SIZE!=NO_SIZE && size()>MAX_SIZE)
 			throw new IndexOutOfBoundsException("Limit Exceeded");
@@ -239,7 +241,8 @@ public class VLinkedList{
 	 * @param x "X" value
 	 * @param y "Y" value
 	 */
-	public void swap(int x,int y){
+	@SuppressWarnings("SameParameterValue")
+    public void swap(int x, int y){
 	
 		if(x==y)
 			return; //return when both elements are equal
@@ -374,15 +377,11 @@ public class VLinkedList{
 	 * get Nth node from the end of the linked list
 	 * @param pos position from the end.
 	 */
-	public LNode getNthNodefromLast(int pos){
+	public LNode getNthNodefromLast(@SuppressWarnings("SameParameterValue") int pos){
 		
 		LNode temp = getNthNode(size()-1-pos);
-		
-		if(temp!=null)
-			return temp;
-		else
-			return null;
-		
+
+		return temp!=null?temp:null;
 	}
 
 	/**
@@ -413,7 +412,7 @@ public class VLinkedList{
 		
 		LNode current = head;
 		LNode prev = null;
-		LNode temp = null;
+		LNode temp;
 		
 		/*
 		 * change next to prev,prev to current, current to next
@@ -554,16 +553,14 @@ public class VLinkedList{
 	 * @param node2 -> node of list2
 	 * @return true if equal, false if not;
 	 */
-	private boolean equals(LNode node1,LNode node2){
-		
-		if(node1==null && node2==null)
-			return true;
-		
-		if(node1!=null && node2!=null)
-			return (node1.data==node2.data) && equals(node1.next,node2.next);
-		
-		return false;
-	}
+	private boolean equals(LNode node1,LNode node2) {
+
+        if (node1 == null && node2 == null)
+            return true;
+
+        return node1 != null && node2 != null && (node1.data == node2.data) && equals(node1.next, node2.next);
+
+    }
 
 	/**
 	 * method to sort the current linked list
@@ -636,7 +633,7 @@ public class VLinkedList{
     private LNode rotateList(LNode node,int k){
     	
     	LNode current = node;
-    	LNode kthNode = null;
+    	LNode kthNode;
     	int count = 0;
     	
     	while(count < k-1 && current != null){
@@ -649,10 +646,11 @@ public class VLinkedList{
     	while(current!=null && current.next != null){
     		current = current.next;
     	}
+
+        assert current != null;
+        current.next = node;
     	
-    	current.next = node;
-    	
-    	node = kthNode.next;
+    	node = kthNode != null ? kthNode.next : null;
     	
     	kthNode.next = null;
     	

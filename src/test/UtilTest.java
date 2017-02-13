@@ -5,7 +5,7 @@ import Exceptions.StackOverflowException;
 import Exceptions.StackUnderflowException;
 import Util.LLutil;
 
-public class UtilTest {
+class UtilTest {
 
 	public static LLutil util = new LLutil();
 

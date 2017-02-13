@@ -1,5 +1,7 @@
 package DataStructures;
 
+import java.util.Objects;
+
 /**
  * template class for node
  * @author 590834
@@ -19,16 +21,6 @@ public class LNode implements Cloneable{
 		this.next = copy.next;
 	}
 	
-	
-	public LNode doClone() throws CloneNotSupportedException{
-		return (LNode) clone();
-	}
-
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
 
 	@Override
 	public int hashCode() {
@@ -48,7 +40,7 @@ public class LNode implements Cloneable{
 		if (getClass() != obj.getClass())
 			return false;
 		LNode other = (LNode) obj;
-		if (data != other.data)
+		if (!Objects.equals(data, other.data))
 			return false;
 		if (next == null) {
 			if (other.next != null)
@@ -57,9 +49,4 @@ public class LNode implements Cloneable{
 			return false;
 		return true;
 	}
-
-	
-	
-	
-	
 }

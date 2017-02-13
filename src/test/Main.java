@@ -5,7 +5,7 @@ import java.util.Comparator;
 import DataStructures.LNode;
 import DataStructures.VLinkedList;
 
-public class Main {
+class Main {
 
 	public static void main(String[] args) throws CloneNotSupportedException {
 		VLinkedList list = new VLinkedList();

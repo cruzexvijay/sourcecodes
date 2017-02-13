@@ -5,6 +5,7 @@ import Exceptions.StackOverflowException;
 import Exceptions.StackUnderflowException;
 
 
+@SuppressWarnings("WeakerAccess")
 public class VStackTest {
 
 	public static void main(String[] args) throws StackOverflowException, StackUnderflowException {

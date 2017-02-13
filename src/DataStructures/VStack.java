@@ -12,7 +12,7 @@ import Exceptions.StackUnderflowException;
  */
 public class VStack<T>{
 
-	private List<T> stackData = new ArrayList<>();
+	private final List<T> stackData = new ArrayList<>();
 	private int top=0;
 	private static final int MAX_SIZE = 1395; // maximum size of the stack
 	

@@ -2,12 +2,15 @@ package Util;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
 import DataStructures.LNode;
 import DataStructures.VLinkedList;
 import DataStructures.VStack;
 import Exceptions.StackOverflowException;
 import Exceptions.StackUnderflowException;
 
+@SuppressWarnings("ALL")
 public class LLutil {
 
 	private static final VLinkedList list = new VLinkedList();
@@ -19,6 +22,7 @@ public class LLutil {
 	 *            input Linked List
 	 * @return true if yes, false if not.
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public static boolean isCycle(VLinkedList list) {
 
 		LNode slow = list.head;
@@ -94,7 +98,7 @@ public class LLutil {
 
 		while (node != null) {
 
-			if (node.data != callStack.pop()) {
+			if (!Objects.equals(node.data, callStack.pop())) {
 				isPalin = false;
 				break;
 			}
@@ -150,6 +154,7 @@ public class LLutil {
 		return res;
 	}
 
+	@SuppressWarnings("WeakerAccess")
 	public static LNode recursiveReverse(LNode current, LNode prev) {
 		// 1->2->3->4
 
@@ -189,6 +194,7 @@ public class LLutil {
 	 *            head node of the list
 	 * @return an instance of Vlinked list
 	 */
+	@SuppressWarnings("SameReturnValue")
 	private static VLinkedList recursiveSwap(LNode node) {
 
 		if (node != null && node.next != null) {
@@ -229,7 +235,7 @@ public class LLutil {
 
 		while (node != null) {
 
-			if (prev != null && prev.data == node.data) {
+			if (prev != null && Objects.equals(prev.data, node.data)) {
 				next = node.next;
 				prev.next = next;
 			} else {
@@ -288,7 +294,7 @@ public class LLutil {
 		VLinkedList list = new VLinkedList();
 
 		while (node1 != null && node2 != null) {
-			if (node1.data == node2.data) {
+			if (Objects.equals(node1.data, node2.data)) {
 
 				list.add(node1.data);
 
@@ -311,7 +317,7 @@ public class LLutil {
 	public static LNode deleteAlternates(LNode head){
 		
 		if(head == null)
-			return head;
+			return null;
 		
 		LNode prev = head;
 		LNode curr = head.next;
@@ -363,7 +369,7 @@ public class LLutil {
 			
 			LNode temp = ref;
 			
-			while(temp!=null && temp.next!=null){
+			while(temp.next != null){
 				temp = temp.next;
 			}
 			
@@ -380,12 +386,12 @@ public class LLutil {
 	 * @param k -> no of nodes in alternate group
 	 * @return reference to the new list
 	 */
-	public static LNode reverseAlternateNodes(LNode head,int k){
-		
-		LNode node = head;
+	@SuppressWarnings("WeakerAccess")
+	public static LNode reverseAlternateNodes(LNode head, int k){
+
 		LNode prev = null;
 		LNode curr = head;
-		LNode next = null;
+		LNode next;
 		
 		int count = 0;
 		
@@ -399,8 +405,8 @@ public class LLutil {
 			count++;
 		}
 				
-		if(node!=null)
-			node.next = curr;
+		if(head !=null)
+			head.next = curr;
 		
 		//count=0;
 		
@@ -429,14 +435,13 @@ public class LLutil {
 		LNode node = head;
 	
 		int max = head.data	;
-		LNode temp = null;
+		LNode temp;
 		
-		while(node!= null && node.next!=null){
+		while(node.next != null){
 			
 			if(node.next.data < max){
 				temp = node.next;
 				node.next = temp.next;
-				temp = null;
 			}else{
 				node = node.next;
 				max = node.data;
@@ -468,13 +473,13 @@ public class LLutil {
 			
 		}
 		
-		System.out.println((oddRef.data&1)!=0);
+		//System.out.println((oddRef.data&1)!=0);
 		
-		if(oddRef!=null && evenRef!=null){
+		if(evenRef != null){
 			
 			LNode temp = evenRef;
 			
-			while(temp!=null && temp.next!=null)
+			while(temp.next != null)
 				temp = temp.next;
 			
 			temp.next = oddRef;
@@ -511,7 +516,8 @@ public class LLutil {
 		
 		if(slow == fast){
 			slow = node;
-			
+
+			assert fast != null;
 			while(slow!=fast.next){
 				slow = slow.next;
 				fast = fast.next;
@@ -590,8 +596,8 @@ public class LLutil {
 
 	private static LNode[] mergeTwoLists(LNode fNode,LNode sNode){
 
-	    LNode pNext = null;
-	    LNode qNext = null;
+	    LNode pNext;
+	    LNode qNext;
 	    LNode pCurrent = fNode;
 	    LNode qCurrent = sNode;
 
@@ -614,7 +620,7 @@ public class LLutil {
 		
 		LNode curr = headRef;
 		LNode prev = null;
-		LNode next = null;
+		LNode next;
 		
 		while(curr!=null && curr.next!=null){
 			
@@ -640,7 +646,7 @@ public class LLutil {
 		
 		LNode curr = headRef;
 		
-		int sum = 0;
+		int sum;
 		int carry = 1;
 		
 		while(curr!=null){
@@ -666,8 +672,13 @@ public class LLutil {
 		
 		return headRef;
 	}
-	
-	public static LNode removeLastOccurence(LNode headRef,int key){
+
+	/**
+	 * @param headRef reference to the head node of the linked list
+	 * @param key last occurence value to be found
+	 * @return head ref to the new list
+	 */
+	public static LNode removeLastOccurence(LNode headRef, @SuppressWarnings("SameParameterValue") int key){
 		
 		LNode prevKeyNode = null;
 		LNode node = headRef;
@@ -684,8 +695,7 @@ public class LLutil {
 			
 			node  = prevKeyNode.next;
 			prevKeyNode.next = node.next;
-			
-			node = null;
+
 		}else{
 			
 			if(headRef!=null && headRef.next!=null){
