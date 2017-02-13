@@ -25,9 +25,55 @@ public class UtilTest {
 		//delDemo();
 		//oddDemo();
 		//cycleDemo();
-		tripletDemo();
+		//tripletDemo();
+       // skipDemo();
+        mergeTDemo();
 	}
-	
+
+	private static void mergeTDemo(){
+        VLinkedList list1 = new VLinkedList();
+        VLinkedList list2 = new VLinkedList();
+
+        list1.add(1);
+        list1.add(3);
+        list1.add(5);
+        list1.add(7);
+        list1.printList();
+
+        list2.add(2);
+        list2.add(4);
+        list2.add(6);
+        list2.add(8);
+        // list2.add(5);
+
+        list2.printList();
+
+        list1.head = LLutil.mergeTwoLists(list1.head,list2.head);
+
+        list1.printList();
+
+    }
+
+	private static void skipDemo(){
+
+        VLinkedList list1 = new VLinkedList();
+        list1.add(1);//
+        list1.add(2);
+        list1.add(3); //
+        list1.add(4);
+        list1.add(6); //
+        list1.add(7);
+        list1.add(2); //
+        list1.add(4);
+        list1.add(6);//
+        list1.add(8);
+        list1.printList();
+
+        LLutil.skipMdeleteN(list1.head,2,2);
+
+        list1.printList();
+
+	}
 	
 	private static void tripletDemo(){
 		 VLinkedList llist1 = new VLinkedList();

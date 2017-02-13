@@ -552,4 +552,69 @@ public class LLutil {
 		
 		return newRef!=null?newRef:null;
 	}
+
+	public static void skipMdeleteN(LNode head,int m,int n){
+
+	    LNode current = head;
+	    LNode t;
+	    int count = 1;
+
+	    while (current!=null){
+
+            while (count<m && current!=null) {
+                current = current.next;
+                count++;
+            }
+
+            if(current==null)
+                return;
+
+            t = current.next;
+            count = 0;
+
+            while (count < n && t!=null && t.next!=null){
+                t = t.next;
+                count++;
+            }
+
+            System.out.println("current : "+current.data+" ::: t : "+t.data);
+
+            current.next = t;
+
+            //System.out.println("current.next : "+current.next.data);
+
+            current = t;
+        }
+	}
+
+
+	public static LNode mergeTwoLists(LNode first,LNode second){
+
+	    LNode pNext = null;
+	    LNode qNext = null;
+	    LNode current = first;
+	    LNode temp = null;
+
+	    // 1->3->5 ----- 2->4->6
+        //1->2->3->4->5->6
+ 	    while (current!=null && second!=null && second.next!=null){
+
+            System.out.println(current.data+"---"+second.data);
+            //temp = second;
+	        pNext = current.next;
+	        qNext = second.next;
+
+            second.next = pNext;
+            current.next = qNext;
+
+            current = pNext;
+            second = qNext;
+
+
+           // System.out.println(current.data+":::"+second.data);
+
+        }
+
+        return first;
+    }
 }
