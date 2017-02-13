@@ -4,7 +4,6 @@ import java.util.Comparator;
 
 import DataStructures.LNode;
 import DataStructures.VLinkedList;
-import Util.LLutil;
 
 public class Main {
 
@@ -100,7 +99,21 @@ public class Main {
 		System.out.println("Rotating list");
 		list.rotateList(4);
 		list.printList();
-				
+		
+		list.clear();
+		
+		list.add(1);
+		list.add(2);
+		list.add(6);
+		list.add(8);
+		list.add(7);
+		list.add(3);
+		list.add(4);
+	//	list.printList();
+		list.reverse();
+		list.printList();
+		list.zigzag();
+		list.printList();
 	}
 
 	private static int findSize(LNode node) {

@@ -1,9 +1,6 @@
 package DataStructures;
 
 import java.util.Comparator;
-
-import org.w3c.dom.Node;
-
 /**
  * A Custom implementation of LinkedList datastructure
  */
@@ -295,6 +292,21 @@ public class VLinkedList{
 		
 		curX.next = curY.next;
 		curY.next = temp;
+	}
+	
+	
+	/**
+	 * method to swap data between two nodes
+	 * 
+	 * @param node1
+	 *            node1
+	 * @param node2
+	 *            node2
+	 */
+	private static void swap(LNode node1, LNode node2) {
+		node1.data = node1.data + node2.data;
+		node2.data = node1.data - node2.data;
+		node1.data = node1.data - node2.data;
 	}
 
 	/**
@@ -646,7 +658,34 @@ public class VLinkedList{
     	
     	return node!=null?node:null;
     }
-  
+    
+
+    public void zigzag(){
+        	
+    	LNode curr = head;
+    	
+    	boolean flag = true;
+    	
+    	while(curr.next!=null){
+    		
+    		System.out.println(curr.data+"--"+curr.next.data);
+    		if(flag){
+    			
+    			if(curr.data > curr.next.data)
+    				swap(curr,curr.next); //3,4
+    		}else{
+    			
+    			if(curr.data < curr.next.data)
+    				swap(curr,curr.next);
+    		}
+    		
+    		curr = curr.next;
+    		flag = !flag;
+    		
+    	}
+    
+    }
+    
 	/**
 	 * clears the linked list
 	 */

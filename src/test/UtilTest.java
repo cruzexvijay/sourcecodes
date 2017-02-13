@@ -1,8 +1,5 @@
 package test;
 
-import java.util.Comparator;
-
-import DataStructures.LNode;
 import DataStructures.VLinkedList;
 import Exceptions.StackOverflowException;
 import Exceptions.StackUnderflowException;
@@ -27,17 +24,73 @@ public class UtilTest {
 		//cycleDemo();
 		//tripletDemo();
        // skipDemo();
-        mergeTDemo();
+       // mergeTDemo();
+		//swap();
+		//add1();
+		lastOccurDemo();
+	}
+	
+	private static void lastOccurDemo(){
+		VLinkedList list = new VLinkedList();
+
+		list.add(1);
+		list.add(2);
+		list.add(5);
+		list.add(4);
+		list.add(5);
+		list.add(6);
+		list.add(7);
+		
+		list.printList();
+		
+		list.head = LLutil.removeLastOccurence(list.head,7);
+		list.printList();
+	}
+	
+	private static void add1(){
+		VLinkedList list = new VLinkedList();
+
+		list.add(1);
+		list.add(9);
+		list.add(9);
+		list.add(0);
+		
+		list.printList();
+		list.reverse();
+		list.head = LLutil.add1(list.head);
+		
+		list.printList();
+						
+	}
+	
+	@SuppressWarnings("unused")
+	private static void swap(){
+
+		VLinkedList list = new VLinkedList();
+
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
+		list.add(5);
+		list.add(6);
+		list.add(7);
+		
+		list.printList();
+		
+		list.head = LLutil.pairwiseSwap(list.head);
+		list.printList();
 	}
 
+	@SuppressWarnings("unused")
 	private static void mergeTDemo(){
         VLinkedList list1 = new VLinkedList();
         VLinkedList list2 = new VLinkedList();
 
         list1.add(1);
         list1.add(3);
-        list1.add(5);
-        list1.add(7);
+       // list1.add(5);
+        //list1.add(7);
         list1.printList();
 
         list2.add(2);
@@ -48,215 +101,12 @@ public class UtilTest {
 
         list2.printList();
 
-        list1.head = LLutil.mergeTwoLists(list1.head,list2.head);
-
+        LLutil.mergeTwoLists(list1, list2);
+        
         list1.printList();
+        list2.printList();
 
     }
-
-	private static void skipDemo(){
-
-        VLinkedList list1 = new VLinkedList();
-        list1.add(1);//
-        list1.add(2);
-        list1.add(3); //
-        list1.add(4);
-        list1.add(6); //
-        list1.add(7);
-        list1.add(2); //
-        list1.add(4);
-        list1.add(6);//
-        list1.add(8);
-        list1.printList();
-
-        LLutil.skipMdeleteN(list1.head,2,2);
-
-        list1.printList();
-
-	}
-	
-	private static void tripletDemo(){
-		 VLinkedList llist1 = new VLinkedList();
-	        VLinkedList llist2 = new VLinkedList();
-	        VLinkedList llist3 = new VLinkedList();
-	 
-	        /* Create Linked List llist1 100->15->5->20 */
-	        llist1.add(20);
-	        llist1.add(5);
-	        llist1.add(15);
-	        llist1.add(100);
-	     
-	        /*create a sorted linked list 'b' 2->4->9->10 */
-	        llist2.add(10);
-	        llist2.add(9);
-	        llist2.add(4);
-	        llist2.add(2);
-	        
-	        llist2.sort();
-	 
-	        /*create another sorted linked list 'c' 8->4->2->1 */
-	        llist3.add(1);
-	        llist3.add(2);
-	        llist3.add(4);
-	        llist3.add(8);
-	 
-	        llist3.sort(new Comparator<Integer>() {
-				
-				@Override
-				public int compare(Integer o1, Integer o2) {
-					// TODO Auto-generated method stub
-					return o2.compareTo(o1);
-				}
-			});
-	        int val = 25;
-	        
-	        llist1.head = LLutil.findTriplets(llist1.head, llist2.head, llist3.head, val);
-	        
-	        llist1.printList();
-	}
-	
-	private static void cycleDemo(){
-		
-		
-		VLinkedList list = new VLinkedList();
-		
-		list.head = new LNode(1);
-		list.head.next = new LNode(2);
-		list.head.next.next = new LNode(3);
-		list.head.next.next.next = new LNode(4);
-		list.head.next.next.next.next = new LNode(5);
-		list.head.next.next.next.next.next = new LNode(6);
-		list.head.next.next.next.next.next = list.head.next.next;
-		
-		//System.out.println("1->2->3->4->5->2");
-		list.head = LLutil.removeLoop(list);
-		//assert(list.head!=null);
-		list.printList();
-	}
-	
-	private static void oddDemo(){
-		VLinkedList list1 = new VLinkedList();
-		list1.add(1);//
-		list1.add(2);
-		list1.add(3); //
-		list1.add(4);
-		list1.add(6); //
-		list1.add(7);
-		list1.add(2); //
-		list1.add(4);
-		list1.add(6);//
-		list1.add(8);
-		list1.printList();
-		
-		list1.head = LLutil.splitOddEven(list1.head);
-		
-		list1.printList();
-	}
-	private static void delDemo(){
-		VLinkedList list1 = new VLinkedList();
-		
-		list1.add(4);
-		list1.add(3);//
-		list1.add(2);
-		list1.add(1); //
-		
-		
-		list1.printList();
-		//list1.reverse();
-		//list1.printList();
-		
-		list1.head = LLutil.del(list1.head);
-		list1.printList();
-	}
-	
-	private static void altDemo(){
-		VLinkedList list1 = new VLinkedList();
-		list1.add(1);//
-		list1.add(2);
-		list1.add(3); //
-		list1.add(4);
-		list1.add(6); //
-		list1.add(7);
-		list1.add(2); //
-		list1.add(4);
-		list1.add(6);//
-		list1.add(8);
-		list1.printList();
-		
-		list1.head = LLutil.reverseAlternateNodes(list1.head, 3);
-		list1.printList();
-	}
-	
-	private static void splitDemo(){
-		VLinkedList list1 = new VLinkedList();
-		list1.add(1);//
-		list1.add(2);
-		list1.add(3); //
-		list1.add(4);
-		list1.add(6); //
-		list1.add(7);
-		list1.add(2); //
-		list1.add(4);
-		list1.add(6);//
-		list1.add(8);
-		list1.printList();
-		
-		VLinkedList l1 = new VLinkedList();
-		VLinkedList l2 = new VLinkedList();
-		
-		LNode[] ls = LLutil.split(list1.head);
-				
-		l1.head = ls[0];
-		l2.head = ls[1];
-		
-		l1.printList();
-		l2.printList();
-		
-	}
-	
-	private static void alternateDemo(){
-		VLinkedList list1 = new VLinkedList();
-		list1.add(1);//
-		list1.add(2);
-		list1.add(3); //
-		list1.add(4);
-		list1.add(6); //
-		list1.add(7);
-		list1.add(2); //
-		list1.add(4);
-		list1.add(6);//
-		list1.add(8);
-		list1.printList();
-		
-		list1.head = LLutil.deleteAlternates(list1.head);
-		
-		list1.printList();
-	}
-
-	private static void intersectDemo() {
-		VLinkedList list1 = new VLinkedList();
-		VLinkedList list2 = new VLinkedList();
-
-		list1.add(1);
-		list1.add(2);
-		list1.add(3);
-		list1.add(4);
-		list1.add(6);
-		list1.printList();
-
-		list1.add(7);
-		list2.add(2);
-		list2.add(4);
-		list2.add(6);
-		list2.add(8);
-		// list2.add(5);
-
-		list2.printList();
-
-		list1.head = LLutil.findIntersect(list1.head, list2.head);
-
-		list1.printList();
-	}
 
 	public static void mergeDemo() {
 		VLinkedList list1 = new VLinkedList();
@@ -336,54 +186,5 @@ public class UtilTest {
 		list.add(1);
 
 		System.out.println(LLutil.isPalindrome(list.head));
-	}
-
-	private static void recReverse() {
-
-		VLinkedList list = new VLinkedList();
-
-		list.add(1);
-		list.add(2);
-		list.add(3);
-		list.add(5);
-
-		// LLutil.printRecursiveReverse(list.head);
-		list.head = LLutil.recursiveReverse(list.head, null);
-		// System.out.println(list.head);
-		list.printList();
-	}
-
-	private static void misc() {
-		VLinkedList list = new VLinkedList();
-
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(5);
-		list.add(1);
-		list.add(2);
-		// list.add(5);
-		list.add(1);
-
-		LLutil.removeSortedDuplicates(list.head).printList();
-
-		System.out.println("////// unsorted dup");
-		LLutil.removeUnsortedDuplicates(list.head).printList();
-
-		System.out.println("Sorting");
-		list.sort();
-		list.printList();
-
-		System.out.println("//////");
-		list.reverse(1);
-		list.printList();
-
-		// list.printList();
-
-		System.out.println("Dual Swap");
-
-		LLutil.dualSwap(list.head).printList();
-
-		// LLutil.recursiveSwap(new LNode(list.head)).printList();
 	}
 }

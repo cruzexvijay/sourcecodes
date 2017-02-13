@@ -1,9 +1,7 @@
 package Util;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-
 import DataStructures.LNode;
 import DataStructures.VLinkedList;
 import DataStructures.VStack;
@@ -577,44 +575,124 @@ public class LLutil {
                 count++;
             }
 
-            System.out.println("current : "+current.data+" ::: t : "+t.data);
-
             current.next = t;
-
-            //System.out.println("current.next : "+current.next.data);
-
             current = t;
         }
 	}
+	
+	public static void mergeTwoLists(VLinkedList list1,VLinkedList list2){
+	
+		LNode[] rets = mergeTwoLists(list1.head, list2.head);
+		list1.head = rets[0];
+		list2.head = rets[1];
+	}
 
 
-	public static LNode mergeTwoLists(LNode first,LNode second){
+	private static LNode[] mergeTwoLists(LNode fNode,LNode sNode){
 
 	    LNode pNext = null;
 	    LNode qNext = null;
-	    LNode current = first;
-	    LNode temp = null;
+	    LNode pCurrent = fNode;
+	    LNode qCurrent = sNode;
 
 	    // 1->3->5 ----- 2->4->6
         //1->2->3->4->5->6
- 	    while (current!=null && second!=null && second.next!=null){
+ 	    while (pCurrent!=null && qCurrent!=null){
+            pNext = pCurrent.next;
+	        qNext = qCurrent.next;
 
-            System.out.println(current.data+"---"+second.data);
-            //temp = second;
-	        pNext = current.next;
-	        qNext = second.next;
+            qCurrent.next = pNext;
+            pCurrent.next = qCurrent;
 
-            second.next = pNext;
-            current.next = qNext;
-
-            current = pNext;
-            second = qNext;
-
-
-           // System.out.println(current.data+":::"+second.data);
-
+            pCurrent = pNext;
+            qCurrent = qNext;
         }
-
-        return first;
+ 	   return new LNode[]{fNode,qCurrent};
     }
+	
+	public static LNode pairwiseSwap(LNode headRef){
+		
+		LNode curr = headRef;
+		LNode prev = null;
+		LNode next = null;
+		
+		while(curr!=null && curr.next!=null){
+			
+			next = curr.next;
+			curr.next = next.next;
+			next.next = curr;
+			
+			if(prev==null){
+				headRef = next;
+			}else{
+				prev.next = next;
+			}
+			
+			prev = curr;
+			curr = curr.next;
+		}
+				
+		return headRef;
+	}
+	
+	
+	public static LNode add1(LNode headRef){
+		
+		LNode curr = headRef;
+		
+		int sum = 0;
+		int carry = 1;
+		
+		while(curr!=null){
+			
+			sum = curr.data + carry;
+			
+			carry = sum >= 10 ? 1 : 0;
+		
+			if(carry==1)
+				curr.data = 0;
+			else{
+				curr.data = sum;
+				break;
+			}
+		
+			curr = curr.next;
+		}
+		
+		list.head = headRef;
+		list.reverse();
+		headRef = list.head;
+		list.clear();
+		
+		return headRef;
+	}
+	
+	public static LNode removeLastOccurence(LNode headRef,int key){
+		
+		LNode prevKeyNode = null;
+		LNode node = headRef;
+		
+		while(node!=null){
+			
+			if(node.next !=null && node.next.data==key)
+				prevKeyNode = node;
+			
+			node =  node.next;
+		}
+		
+		if(prevKeyNode!=null){
+			
+			node  = prevKeyNode.next;
+			prevKeyNode.next = node.next;
+			
+			node = null;
+		}else{
+			
+			if(headRef!=null && headRef.next!=null){
+				headRef = headRef.next;
+			}
+		}
+		
+		return headRef;
+	}
 }
